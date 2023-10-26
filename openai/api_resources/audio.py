@@ -54,6 +54,7 @@ class Audio(APIResource):
         organization=None,
         *,
         deployment_id=None,
+        request_timeout=600,
         **params,
     ):
         requestor, files, data = cls._prepare_request(
@@ -69,7 +70,7 @@ class Audio(APIResource):
         )
         api_type, api_version = cls._get_api_type_and_version(api_type, api_version)
         url = cls._get_url("transcriptions", deployment_id=deployment_id, api_type=api_type, api_version=api_version)
-        response, _, api_key = requestor.request("post", url, files=files, params=data, **params)
+        response, _, api_key = requestor.request("post", url, files=files, params=data, request_timeout=request_timeout)
         return util.convert_to_openai_object(
             response, api_key, api_version, organization
         )
