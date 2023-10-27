@@ -19,8 +19,11 @@ from typing import (
     overload,
 )
 from urllib.parse import urlencode, urlsplit, urlunsplit
-
-import aiohttp
+try:
+    import aiohttp
+except:
+    pass
+# import aiohttp
 import requests
 
 if sys.version_info >= (3, 8):
